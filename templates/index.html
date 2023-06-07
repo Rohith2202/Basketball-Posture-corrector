@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Video</title>
+</head>
+<style>
+
+.main_text{
+  width: 100%;
+  padding: 1rem 0rem;
+  background-color: #000000;
+}
+button {
+  border: 0;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #000000;
+  color: #FFFFFF;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  border-radius: 50%;
+  background-color: #2185D0;
+}
+body:hover {
+  background-image: url("static\\Live_image.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+body {
+   margin: 0px;
+   padding: 0px;
+}
+
+.p1{
+  text-align: center;
+  font-size: larger;
+  padding: 16px 0px;
+  margin: 0px 0px;
+}
+.carousel-fluid{
+  width: 100vw;
+  height: calc(100vh - 86px);
+  max-width: 100%;
+  max-height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+.carousel{
+  display: flex;
+  transition: 0.4s;
+  height:100%
+}
+.carousel-fluid img{
+  width: 100vw;
+  height: 100%;
+  flex-grow: 1;
+  flex-shrink: 0;
+  flex-basis: 100vw;
+  transition: 0.3s;
+}
+
+
+.buttons{
+  width: 100%;
+  margin: auto;
+  display: flex;
+  justify-content: space-around;
+  position: absolute;
+  bottom: 100px;
+  z-index: 1000;
+}
+
+</style>
+<body>
+
+  <nav class="main_text"><p style="background-color: black; color: white;" class="p1">Basketball Posture Tracking and Corrector</p></nav>
+ 
+    <div class="buttons">
+      <a href="{{ url_for('main') }}">
+        <button class="button" id="live-posture" value=1>
+          Live posture detection
+        </button>  
+      </a>
+      <a href="{{ url_for('posture') }}">
+        <button id="basket-ball-button" value=2>
+          Posture predictor
+        </button>  
+      </a>
+      <a href="{{ url_for('upload') }}">
+        <button class="button" value=3>
+          Posture corrector
+        </button>  
+      </a>
+      </div>
+      <section class="carousel-fluid">
+        <div class="carousel" id="carousel">
+          <img src="/static/Index_bb.jpg" id="intital-image">
+          <img src="https://www.mdpi.com/sensors/sensors-21-05236/article_deploy/html/images/sensors-21-05236-g003.png">
+          <img src="https://www.wikihow.com/images/thumb/7/77/Shoot-Far-in-Basketball-Step-5-Version-2.jpg/aid11376710-v4-728px-Shoot-Far-in-Basketball-Step-5-Version-2.jpg" id="posture-predictor-image">  
+          <img src="https://www.wikihow.com/images/thumb/9/9d/Play-Defense-in-Basketball-Step-1-Version-2.jpg/v4-460px-Play-Defense-in-Basketball-Step-1-Version-2.jpg.webp">
+        </div>
+      </section>
+<script type="text/javascript">
+  const carousel = document.getElementById('carousel')
+  const buttons = [].slice.call(document.querySelectorAll('.buttons button'))
+  console.log(buttons)
+  console.log(carousel)
+  buttons.forEach(ele => {
+    ele.addEventListener('mouseover',(e)=>{
+      console.log(e.target.value)
+      carousel.style.transform = `translateX(-${parseInt(e.target.value)*100}vw)`
+    })
+    ele.addEventListener('mouseout',()=>{
+      carousel.style.transform = `translateX(0px)`
+    })
+  });
+  
+</script>
+</body>
+</html>
